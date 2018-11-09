@@ -2,13 +2,450 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Myapp</title>
+  <title>SocialApp</title>
   <base href="/">
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">
 </head>
 <body>
   <app-root></app-root>
+  
+  <!-- <script>
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+      console.log('statusChangeCallback');
+      console.log(response);
+      // The response object is returned with a status field that lets the
+      // app know the current login status of the person.
+      // Full docs on the response object can be found in the documentation
+      // for FB.getLoginStatus().
+      if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        testAPI();
+      } else {
+        // The person is not logged into your app or we are unable to tell.
+        document.getElementById('abcd').innerHTML = 'Please log ' +
+          'into this app.';
+      }
+    }
+  
+    // This function is called when someone finishes with the Login
+    // Button.  See the onlogin handler attached to it in the sample
+    // code below.
+    function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    }
+  
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '2048108948601505',
+        cookie     : true,  // enable cookies to allow the server to access 
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.8' // use graph api version 2.8
+      });
+  
+      // Now that we've initialized the JavaScript SDK, we call 
+      // FB.getLoginStatus().  This function gets the state of the
+      // person visiting this page and can return one of three states to
+      // the callback you provide.  They can be:
+      //
+      // 1. Logged into your app ('connected')
+      // 2. Logged into Facebook, but not your app ('not_authorized')
+      // 3. Not logged into Facebook and can't tell if they are logged into
+      //    your app or not.
+      //
+      // These three cases are handled in the callback function.
+  
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+  
+    };
+  
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
+    function testAPI() {
+      console.log('Welcome!  Fetching your information.... ');
+      FB.api('/me?fields=id,name,first_name,email', function(response) {
+        console.log('Successful login for: ' + response);
+        document.getElementById('fbMail').innerHTML = "ID "+
+        response.id + '<br><b> Name : </b>'+response.name + '<br><b> EmailId : </b>'+response.email+'<br>';
+      });
+    }
+    FB.logout(function(response) {
+   // Person is now logged out
+   document.getElementById('fbMail').innerHTML =
+          'Email<br>Name<br>ID';
+});
+  </script> -->
+
+
+  
+  <div class="container">
+  <table class="table table-bordered table-hover table-sm" style="margin-left: 10px">
+    <thead class="thead-dark"><th title="Field #1">Platfroms</th>
+    <th title="Field #2">API Access</th>
+    <th title="Field #3">User permission(default)</th>
+    <th title="Field #4">Additional user permission</th>
+    <th title="Field #5">Additional user permission Steps</th>
+    <th title="Field #6">Provides login service</th>
+    </thead>
+    <tbody><tr>
+    <td>Facebook<br></div>
+    <a id="facebook-button" class="btn btn-block btn-social btn-facebook" style="color:white">
+      <i class="fab fa-facebook"></i> Sign in with Facebook
+    </a>
+    <script>
+      $('#facebook-button').on('click', function() {
+  // Initialize with your OAuth.io app public key
+      OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+      // Use popup for oauth
+      OAuth.popup('facebook').then(facebook => {
+        console.log('facebook:',facebook);
+        // Prompts 'welcome' message with User's email on successful login
+        // #me() is a convenient method to retrieve user data without requiring you
+        // to know which OAuth provider url to call
+        facebook.me().then(data => {
+          console.log('me data:', data);
+          alert('Facebook says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+        })
+        // Retrieves user data from OAuth provider by using #get() and
+        // OAuth provider url
+        facebook.get('/v2.5/me?fields=name,first_name,last_name,email,gender,location,locale,work,languages,birthday,relationship_status,hometown,picture').then(data => {
+          console.log('self data:', data);
+        })
+      });
+    })
+    </script></td>
+    <td>Limited Before Review</td>
+    <td id='fbMail'>Email_Id<br/>Name<br/>Profile Picture<br/>user_Id<br/></td>
+    <td>user_events<br/>user_friends<br/>user_hometown<br/>user_link<br/>user_location<br/>user_photos<br/>user_posts<br/>user_tagged_places<br/>user_videos</td>
+    <td>1.Apply for application review<br/>2.Make a video of application<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>Pinterest<br>
+      <a id="pinterest-button" class="btn btn-block btn-social btn-pinterest" style="color:white">
+        <span class="fab fa-pinterest"></span> Sign in With Pinterest </a></td>
+        <script>
+          $('#pinterest-button').on('click', function (){
+              window.pAsyncInit = function() {
+                  PDK.init({
+                      appId: "4997722204998226483",
+                      cookie: true
+                  });
+                  //login
+                  PDK.login({ scope : 'read_relationships,read_public' }, function(response){
+                      if (!response || response.error) {
+                          alert('Error occurred');
+                      } else {
+                        
+                         console.log(JSON.stringify(response));
+                      }
+                  //get board info
+                  var pins = [];
+                  PDK.request('/v1/me/', function (response) {
+                    if (!response || response.error) {
+                      //alert('Error occurred');
+                    } else {
+                      console.log(JSON.stringify(response));
+                        //  alert('success');
+                          console.log(PDK.getSession().accessToken);
+          
+                          var yahoo = $( "#result" ).load( "https://api.pinterest.com/v1/me/?access_token="+PDK.getSession().accessToken+"&fields=counts" );
+                          console.log(yahoo);
+                          PDK.logout();
+                    }
+                  });
+                  
+                  //end get board info
+                  });
+                  //end login
+              };
+              (function(d, s, id){
+                  var js, pjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) {return;}
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//assets.pinterest.com/sdk/sdk.js";
+                  pjs.parentNode.insertBefore(js, pjs);
+              }(document, 'script', 'pinterest-jssdk'));
+          });
+          </script>
+    <td>No Limit</td>
+    <td id="result">Pins<br/>Followers<br/>Following<br/>Boards<br/>Pinterest ID</td>
+    <td>None</td>
+    <td>None</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>Amazon<br>
+     <a id="amazon-button" class="btn btn-block btn-social btn-github" style="color:white"> 
+        <i class="fab fa-amazon"></i> Sign in With Amazon </a>
+      <script>
+        $('#amazon-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for OAuth
+          OAuth.popup('amazon').then(amazon => {
+          console.log('amazon:', amazon);
+          // Prompts 'welcome' message with User's name on successful login
+          // #me() is a convenient method to retrieve user data without requiring you
+          // to know which OAuth provider url to call
+          amazon.me().then(data => {
+            document.getElementById("amazon-data").innerHTML = "<b>Amazon ID : </b>"+data.id +"<br> <b>Email ID : </b>"+ data.email +"<br><b> Name : </b>"+ data.name +"<br><b> Zipcode : </b>"+ data.zipcode  ; 
+            console.log('me data:', data);
+            
+          });
+          // Retrieves user data from OAuth provider by using #get() and
+          // OAuth provider url
+          amazon.get('/v1/users/self').then(data => {
+            console.log('self data:', data);
+            
+          })
+        });
+       
+      })
+     
+      </script>
+   
+     </td>
+    <td>Limited Access</td>
+    <td id="amazon-data">Amazon ID<br/>Email Id<br/>Name<br/>Zipcode<br/></td>
+    <td> </td>
+    <td> </td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Uber<br>
+      <a id="uber-button" class="btn btn-block btn-social btn-github" style="color:white">
+        <i class="fab fa-uber"></i> Sign in With Uber </a>
+      <script>
+        $('#uber-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for OAuth
+          OAuth.popup('uber').then(uber => {
+          console.log('uber:', uber);
+          // Prompts 'welcome' message with User's name on successful login
+          // #me() is a convenient method to retrieve user data without requiring you
+          // to know which OAuth provider url to call
+          uber.me().then(data => {
+            document.getElementById("uber-data").innerHTML = "<b>Rider ID : </b>"+data.raw.rider_id +"<br><b> Email ID : </b>"+ data.raw.email +"<br><b> Name : </b>"+ data.raw.first_name +" "+ data.raw.last_name +"<br><b> Promo Code : </b>"+ data.raw.promo_code +"<br><b> UUID : </b>"+ data.raw.uuid ; 
+            console.log('me data:', data);
+            
+          });
+          // Retrieves user data from OAuth provider by using #get() and
+          // OAuth provider url
+          uber.get('/v1/users/self').then(data => {
+            console.log('self data:', data);
+            
+          })
+        });
+      })
+      </script></td>
+    <td>Limited Access</td>
+    <td id="uber-data">Rider ID<br/>Email Id<br/>Name<br/>Promo code<br/>UUID</td>
+    <td>all_trips<br/>request_receipts<br/>request</td>
+    <td>1.Sign up as Driver<br/>2.Verify to work as driver<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td>Twitter<br>
+      <a id="twitter-button" class="btn btn-block btn-social btn-twitter" style="color:white">
+        <i class="fab fa-twitter"></i> Sign in With Twitter
+      </a>
+      <script>
+        $('#twitter-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for OAuth
+          OAuth.popup('twitter').then(twitter => {
+          console.log('twitter:', twitter);
+          // Prompts 'welcome' message with User's name on successful login
+          // #me() is a convenient method to retrieve user data without requiring you
+          // to know which OAuth provider url to call
+          twitter.me().then(data => {
+            document.getElementById("twitter-data").innerHTML = "<b>Twitter ID : </b> "+data.id +"<br><b> Username : </b>"+data.alias+"<br><b> Screen Name : </b>"+ data.name +"<br><b> Account Created at : </b>" +data.raw.created_at + "<br><b> Followers : </b>"+ data.raw.followers_count +"<br><b> Following : </b>"+ data.raw.friends_count+ "<br><b> Location : </b>"+ data.raw.location +"<br><b> Bio : </b>"+ data.bio ; 
+            console.log('me data:', data);
+            
+          });
+          // Retrieves user data from OAuth provider by using #get() and
+          // OAuth provider url
+          twitter.get('/v1/users/self').then(data => {
+            console.log('self data:', data);
+            
+          })
+        });
+      })
+      </script>
+    </td>
+    <td>Limited Before Review</td>
+    <td id='twitter-data'> Twitter ID<br/>Username<br/>Screen Name<br/>Account created at<br/>Followers<br/>Following<br/>Location<br/>Bio</td>
+    <td> </td>
+    <td>1.Apply for application review<br/>2.Explain in detail why additional <br/>   permission are needed<br/></td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>LinkedIn<br>
+      <a id="linkedin-button" class="btn btn-block btn-social btn-linkedin" style="color:white">
+          <i class="fab fa-linkedin"></i> Sign in With LinkedIn </a></td>
+          <script>
+            $('#linkedin-button').on('click', function() {
+            // Initialize with your OAuth.io app public key
+            OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+            // Use popup for oauth
+            OAuth.popup('linkedin').then(linkedin => {
+              console.log('linkedin:',linkedin);
+              // Prompts 'welcome' message with User's email on successful login
+              // #me() is a convenient method to retrieve user data without requiring you
+              // to know which OAuth provider url to call
+              linkedin.me().then(data => {
+                console.log('me data:', data);
+                document.getElementById("linkedin-data").innerHTML = "<b>LinkedIn ID : </b>"+data.id +"<br><b> Name : </b>"+ data.name +"<br><b> Bio : </b>"+data.bio+"<br><b> Email ID : </b>"+data.email ; 
+               // alert('Linkedin says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+              })
+              // Retrieves user data from OAuth provider by using #get() and
+              // OAuth provider url
+              linkedin.get('/v1/people/~:(id,first-name,last-name,headline,picture-url,email-address,public-profile-url)?format=json').then(data => {
+                console.log('self data:', data);
+              })
+            });
+          })
+          </script>
+    <td>Limited </td>
+    <td id='linkedin-data'>LinkedIn ID<br/> Name<br/>Bio<br/>Email Id<br/></td>
+    <td>connections and more</td>
+    <td>Partnership Program</td>
+    <td>Yes</td>
+    </tr>
+    <tr>
+    <td>Instagram<br>
+    <a id="instagram-button" class="btn btn-block btn-social btn-instagram" style="color:white">
+      <i class="fab fa-instagram"></i> Sign in With Instagram </a></td>
+      <script>
+          $('#instagram-button').on('click', function() {
+            // Initialize with your OAuth.io app public key
+            OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+            // Use popup for OAuth
+            OAuth.popup('instagram').then(instagram => {
+            console.log('instagram:', instagram);
+            // Prompts 'welcome' message with User's name on successful login
+            // #me() is a convenient method to retrieve user data without requiring you
+            // to know which OAuth provider url to call
+            instagram.me().then(data => {
+              document.getElementById("insta-data").innerHTML = "<b> Instagram ID : </b>"+data.id +"<br><b> Username : </b>"+ data.alias +"<br><b> Name : </b>"+ data.name +"<br><b> Bio : </b>"+ data.raw.data.bio +"<br><b> Followers : </b>"+ data.raw.data.counts.followed_by +"<br><b> Following : </b>"+ data.raw.data.counts.follows +"<br><b> Posts count : </b>"+ data.raw.data.counts.media  ; 
+              console.log('me data:', data);
+              
+            });
+            // Retrieves user data from OAuth provider by using #get() and
+            // OAuth provider url
+            instagram.get('/v1/users/self').then(data => {
+              console.log('self data:', data);
+              
+            })
+            var user = User.getIdentity();
+          user.logout().done(function() {
+            //todo when logout
+          });
+        
+          });           
+        })
+        </script>
+    <td>Limited Before Review</td>
+    <td id="insta-data">Instagram ID<br/>Username<br/>Name<br/>Bio<br/>Followers<br/>Following<br/>Posts count</td>
+    <td>Other permissions are depricated</td>
+    <td>1.Apply for application review<br/>2.Make a video of application<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
+    <td>Yes</td>
+    </tr>
+    <td>GitHub<br>
+      <a id="github-button" class="btn btn-block btn-social btn-github" style="color:white">
+        <i class="fab fa-github"></i> Sign in With Github </a>
+        <script>
+          $('#github-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for oauth
+          // Alternative is redirect
+          OAuth.popup('github').then(github => {
+            console.log('github:', github);
+            // Retrieves user data from oauth provider
+            // Prompts 'welcome' message with User's email on successful login
+            // #me() is a convenient method to retrieve user data without requiring you
+            // to know which OAuth provider url to call
+            github.me().then(data => {
+              console.log('me data:', data);
+              document.getElementById("github-data").innerHTML = "<b> Github ID : </b>"+data.id +"<br><b> Username : </b>"+ data.alias +"<br><b> Name : </b>"+ data.name +"<br><b> Email ID : </b>"+data.email+"<br><b> Location : </b>"+ data.location +"<br><b> Followers : </b>"+ data.raw.user.followers +"<br><b> Following : </b>"+ data.raw.user.following +"<br><b> Bio : </b>"+ data.bio ; 
+              //alert('GitHub says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+            });
+            // Retrieves user data from OAuth provider by using #get() and
+            // OAuth provider url
+            github.get('/user').then(data => {
+              console.log('self data:', data);
+            })
+          });
+        })
+        </script>
+    </td>
+    <td> </td>
+    <td id='github-data'>Github ID<br/>Username<br/>Name<br/>Email Id<br/>Location<br/>Followers<br/>Following<br/>Bio</td>
+    <td> </td>
+    <td> </td>
+    <td>yes</td>
+    </tr>
+    <tr>
+    <td>Yahoo<br>
+      <a id="yahoo-button" class="btn btn-block btn-social btn-yahoo" style="color:white">
+        <i class="fab fa-yahoo"></i> Sign in With Yahoo </a>
+      <script>
+        $('#yahoo-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for OAuth
+          OAuth.popup('yahoo').then(yahoo => {
+          console.log('yahoo:', yahoo);
+          // Prompts 'welcome' message with User's name on successful login
+          // #me() is a convenient method to retrieve user data without requiring you
+          // to know which OAuth provider url to call
+          yahoo.me().then(data => {
+            //document.getElementById("uber-data").innerHTML = data.raw.rider_id +"<br>"+ data.raw.email +"<br>"+ data.raw.first_name +"<br>"+ data.raw.last_name +"<br>"+ data.raw.promo_code +"<br>"+ data.raw.uuid ; 
+            console.log('me data:', data);
+            
+          });
+          // Retrieves user data from OAuth provider by using #get() and
+          // OAuth provider url
+          yahoo.get('/v1/users/self').then(data => {
+            console.log('self data:', data);
+            
+          })
+        });
+      })
+      </script></td>
+    <td>Limited Access</td>
+    <td id="yahoo-data">client_Id<br/>language<br/>max_age<br/></td>
+    <td>None</td>
+    <td>1.Create application<br/>2.Get Auhtorisation Credentials<br/>3.Authenticate Users<br/>4.Send authentication request to Yahoo</td>
+    <td>yes</td>
+    </tr>
+    </tbody></table>
+  </div>
 </body>
 </html>
