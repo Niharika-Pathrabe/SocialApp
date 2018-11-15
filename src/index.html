@@ -4,343 +4,439 @@
   <meta charset="utf-8">
   <title>SocialApp</title>
   <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#343a40" />
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="##343a40" />
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="##343a40" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-  
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">
+
+  <!-- //open graphdata -->
+  <meta property="og:title" content="My Shared Article Title" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:description" content="Description of shared article" />
+  <meta property="og:url" content="https://webproject-77225.firebaseapp.com" />
+  <meta property="fb:app_id" content="2048108948601505" />
+  <meta name="author" content="Aadway">
+  <meta property="og:image" content="https://briffly.com/wp-content/uploads/medium-m-color-200px.png" />
 </head>
 <body>
-  <app-root></app-root>
-  
-  <!-- <script>
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-      console.log('statusChangeCallback');
-      console.log(response);
-      // The response object is returned with a status field that lets the
-      // app know the current login status of the person.
-      // Full docs on the response object can be found in the documentation
-      // for FB.getLoginStatus().
-      if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        testAPI();
-      } else {
-        // The person is not logged into your app or we are unable to tell.
-        document.getElementById('abcd').innerHTML = 'Please log ' +
-          'into this app.';
-      }
-    }
-  
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">
+              <img src="https://briffly.com/wp-content/uploads/medium-m-color-200px.png" width="40" height="40" class="d-inline-block align-center" alt="">
+              SocioLeaks
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Developers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="#">Feedback</a>
+                </li>
+            </div>
+          </nav>
+<br><br><br><br><br><br><br><br><br>
+<div class="container">
+  <div class="row">
+      <div class="col-md-6"><img src="https://blog.bufferapp.com/wp-content/uploads/2015/09/Mark-Macdonalds-home-screen.jpg" height="500px" /></div>
+      <div class="col-md-6 align-self-center" style="font-size:30px;text-align: justify" >"What social-media really becomes after years of use is a constant stream of information both verbal and visual that at first 
+                      drenches the mind, quenching its thirst for knowledge, and subduing its curiosity slowly but surly transforms into a torrent that renders the brain heavy and the mind restless"</div>
+    </div>
+  </div>
+  <br><br><br><br><br><br><br>
+<!-- <div class="container"> -->
+  <table class="table table-bordered table-hover table-sm" style="margin-left: 10px">
+    <thead class="thead-dark"><th title="Field #1">Platforms</th>
+    <th title="Field #2"><a id="facebook-button" class="btn btn-block btn-social btn-facebook" style="color:white">
+      <i class="fab fa-facebook"></i> Facebook
+    </a>
+    <a id="facebook-logout-button" class="btn btn-block btn-social btn-facebook" style="color:white;display: none;">
+      <i class="fab fa-facebook"></i>Logout</a>
+    <script>
+     function getUserData() {
+        FB.api('/me', {fields: 'name,email,birthday,hometown,location,picture'}, (response) => {
+        console.log(response);
+        document.getElementById('facebook-data').innerHTML = response.picture.data.url;
+        document.getElementById('facebook-data1').innerHTML= response.id;
+        document.getElementById('facebook-data2').innerHTML= response.name;
+        document.getElementById('facebook-data3').innerHTML=response.email;
+        document.getElementById('facebook-button').style.display = 'none';
+        document.getElementById('facebook-logout-button').style.display = 'block';
       });
     }
-  
-    window.fbAsyncInit = function() {
+    
+    window.fbAsyncInit = () => {
+      //SDK loaded, initialize it
       FB.init({
         appId      : '2048108948601505',
-        cookie     : true,  // enable cookies to allow the server to access 
-                            // the session
-        xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.8' // use graph api version 2.8
+        xfbml      : true,
+        version    : 'v2.8'
       });
-  
-      // Now that we've initialized the JavaScript SDK, we call 
-      // FB.getLoginStatus().  This function gets the state of the
-      // person visiting this page and can return one of three states to
-      // the callback you provide.  They can be:
-      //
-      // 1. Logged into your app ('connected')
-      // 2. Logged into Facebook, but not your app ('not_authorized')
-      // 3. Not logged into Facebook and can't tell if they are logged into
-      //    your app or not.
-      //
-      // These three cases are handled in the callback function.
-  
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
+    
+      //check user session and refresh it
+      FB.getLoginStatus((response) => {
+        if (response.status === 'connected') {
+          //user is authorized
+        
+          getUserData();
+        } else {
+          //user is not authorized
+        }
       });
-  
     };
-  
-    // Load the SDK asynchronously
+    
+    //load the JavaScript SDK
     (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-      console.log('Welcome!  Fetching your information.... ');
-      FB.api('/me?fields=id,name,first_name,email', function(response) {
-        console.log('Successful login for: ' + response);
-        document.getElementById('fbMail').innerHTML = "ID "+
-        response.id + '<br><b> Name : </b>'+response.name + '<br><b> EmailId : </b>'+response.email+'<br>';
-      });
-    }
-    FB.logout(function(response) {
-   // Person is now logged out
-   document.getElementById('fbMail').innerHTML =
-          'Email<br>Name<br>ID';
-});
-  </script> -->
-
-
-  
-  <div class="container">
-  <table class="table table-bordered table-hover table-sm" style="margin-left: 10px">
-    <thead class="thead-dark"><th title="Field #1">Platfroms</th>
-    <th title="Field #2">API Access</th>
-    <th title="Field #3">User permission(default)</th>
-    <th title="Field #4">Additional user permission</th>
-    <th title="Field #5">Additional user permission Steps</th>
-    <th title="Field #6">Provides login service</th>
-    </thead>
-    <tbody><tr>
-    <td>Facebook<br></div>
-    <a id="facebook-button" class="btn btn-block btn-social btn-facebook" style="color:white">
-      <i class="fab fa-facebook"></i> Sign in with Facebook
-    </a>
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+    
+    //add event listener to login button
+    document.getElementById('facebook-button').addEventListener('click', () => {
+      //do the login
+      FB.login((response) => {
+        if (response.authResponse) {
+          //user just authorized your app
+          //document.getElementById('loginBtn').style.display = 'none';
+          getUserData();
+        }
+      }, {scope: 'email,public_profile', return_scopes: true});
+    }, false);
+    document.getElementById('facebook-logout-button').addEventListener('click',()=>{
+    // FB.logout(function(response) {
+    //     console.log("logout");
+    //   });
+        document.getElementById('facebook-data').innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";;
+        document.getElementById('facebook-data1').innerHTML= "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";;
+        document.getElementById('facebook-data2').innerHTML= "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";;
+        document.getElementById('facebook-data3').innerHTML="<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";;
+        document.getElementById('facebook-button').style.display = 'block';
+        document.getElementById('facebook-logout-button').style.display = 'none';
+    }); 
+    </script>
+    </th>
+    <th title="Field #7"><a id="github-button" class="btn btn-block btn-social btn-github" style="color:white">
+        <i class="fab fa-github"></i> Github </a>
+        <a id="github-logout-button" class="btn btn-block btn-social btn-github" style="color:white;display: none;">
+          <i class="fab fa-github"></i>Logout</a>
+        <script>
+          $('#github-button').on('click', function() {
+          // Initialize with your OAuth.io app public key
+          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+          // Use popup for oauth
+          // Alternative is redirect
+          OAuth.popup('github').then(github => {
+            console.log('github:', github);
+            // Retrieves user data from oauth provider
+            // Prompts 'welcome' message with User's email on successful login
+            // #me() is a convenient method to retrieve user data without requiring you
+            // to know which OAuth provider url to call
+            github.me().then(data => {
+              console.log('me data:', data);
+              document.getElementById("github-data").innerHTML =  data.avatar ; 
+              document.getElementById("github-data1").innerHTML = data.id ;
+              document.getElementById("github-data2").innerHTML = data.name ;
+              document.getElementById("github-data3").innerHTML = data.email ;
+              document.getElementById("github-data4").innerHTML = data.alias ;
+              document.getElementById("github-data5").innerHTML = data.bio ;
+              document.getElementById("github-data6").innerHTML = data.location ;
+              document.getElementById("github-data7").innerHTML = data.raw.user.followers ;
+              document.getElementById("github-data8").innerHTML = data.raw.user.following ;
+              document.getElementById("github-button").style.display='none';
+              document.getElementById("github-logout-button").style.display='block';
+              //alert('GitHub says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+            });
+            // Retrieves user data from OAuth provider by using #get() and
+            // OAuth provider url
+            github.get('/user').then(data => {
+              console.log('self data:', data);
+            })
+          });
+        })
+        $('#github-logout-button').on('click',function(){
+              console.log("Clicked logout");
+              document.getElementById("github-data").innerHTML =  "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>"; 
+              document.getElementById("github-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data4").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data5").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data6").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data7").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("github-data8").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+               document.getElementById("github-button").style.display='block';
+               document.getElementById("github-logout-button").style.display='none';
+         })
+        </script></th>
+    <th title="Field #3"><a id="amazon-button" class="btn btn-block btn-social btn-github" style="color:white;background-color: #ff9900;"> 
+      <i class="fab fa-amazon"></i> Amazon </a>
+      <a id="amazon-logout-button" class="btn btn-block btn-social btn-github" style="color:white;display: none;">
+        <i class="fab fa-amazon"></i>Logout</a>
     <script>
-      $('#facebook-button').on('click', function() {
-  // Initialize with your OAuth.io app public key
-      OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-      // Use popup for oauth
-      OAuth.popup('facebook').then(facebook => {
-        console.log('facebook:',facebook);
-        // Prompts 'welcome' message with User's email on successful login
+      $('#amazon-button').on('click', function() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+        // Use popup for OAuth
+        OAuth.popup('amazon').then(amazon => {
+        console.log('amazon:', amazon);
+        // Prompts 'welcome' message with User's name on successful login
         // #me() is a convenient method to retrieve user data without requiring you
         // to know which OAuth provider url to call
-        facebook.me().then(data => {
+        amazon.me().then(data => {
+          document.getElementById("amazon-data").innerHTML = data.id ; 
+          document.getElementById("amazon-data1").innerHTML = data.name ; 
+          document.getElementById("amazon-data2").innerHTML = data.email  ; 
+          document.getElementById("amazon-data3").innerHTML = data.zipcode  ; 
           console.log('me data:', data);
-          alert('Facebook says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
-        })
+          document.getElementById("amazon-button").style.display='none';
+          document.getElementById("amazon-logout-button").style.display='block';
+          
+        });
         // Retrieves user data from OAuth provider by using #get() and
         // OAuth provider url
-        facebook.get('/v2.5/me?fields=name,first_name,last_name,email,gender,location,locale,work,languages,birthday,relationship_status,hometown,picture').then(data => {
+        amazon.get('/v1/users/self').then(data => {
           console.log('self data:', data);
+          
+        })
+      });
+     
+    })
+    $('#amazon-logout-button').on('click',function(){
+            console.log("Clicked logout");
+            document.getElementById("amazon-data").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("amazon-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("amazon-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("amazon-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+             document.getElementById("amazon-button").style.display='block';
+             document.getElementById("amazon-logout-button").style.display='none';
+       })
+    </script></th>
+    <th title="Field #4"> <a id="uber-button" class="btn btn-block btn-social btn-github" style="color:white">
+      <i class="fab fa-uber"></i> Uber </a>
+      <a id="uber-logout-button" class="btn btn-block btn-social btn-github" style="color:white;display: none;">
+        <i class="fab fa-uber"></i>Logout</a>
+    <script>
+      $('#uber-button').on('click', function() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+        // Use popup for OAuth
+        OAuth.popup('uber').then(uber => {
+        console.log('uber:', uber);
+        // Prompts 'welcome' message with User's name on successful login
+        // #me() is a convenient method to retrieve user data without requiring you
+        // to know which OAuth provider url to call
+        uber.me().then(data => {
+          document.getElementById("uber-data").innerHTML = data.raw.picture ; 
+          document.getElementById("uber-data1").innerHTML = data.raw.rider_id ;
+          document.getElementById("uber-data2").innerHTML = data.raw.first_name +" "+ data.raw.last_name ;
+          document.getElementById("uber-data3").innerHTML = data.raw.email ;
+          document.getElementById("uber-data4").innerHTML = data.raw.promo_code ;
+          console.log('me data:', data);
+          document.getElementById("uber-button").style.display='none';
+          document.getElementById("uber-logout-button").style.display='block';
+          
+        });
+        // Retrieves user data from OAuth provider by using #get() and
+        // OAuth provider url
+        uber.get('/v1/users/self').then(data => {
+          console.log('self data:', data);
+          
         })
       });
     })
-    </script></td>
-    <td>Limited Before Review</td>
-    <td id='fbMail'>Email_Id<br/>Name<br/>Profile Picture<br/>user_Id<br/></td>
-    <td>user_events<br/>user_friends<br/>user_hometown<br/>user_link<br/>user_location<br/>user_photos<br/>user_posts<br/>user_tagged_places<br/>user_videos</td>
-    <td>1.Apply for application review<br/>2.Make a video of application<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
-    <td>Yes</td>
-    </tr>
-    <tr>
-    <td>Pinterest<br>
-      <a id="pinterest-button" class="btn btn-block btn-social btn-pinterest" style="color:white">
-        <span class="fab fa-pinterest"></span> Sign in With Pinterest </a></td>
-        <script>
-          $('#pinterest-button').on('click', function (){
-              window.pAsyncInit = function() {
-                  PDK.init({
-                      appId: "4997722204998226483",
-                      cookie: true
-                  });
-                  //login
-                  PDK.login({ scope : 'read_relationships,read_public' }, function(response){
-                      if (!response || response.error) {
-                          alert('Error occurred');
-                      } else {
-                        
-                         console.log(JSON.stringify(response));
-                      }
-                  //get board info
-                  var pins = [];
-                  PDK.request('/v1/me/', function (response) {
-                    if (!response || response.error) {
-                      //alert('Error occurred');
-                    } else {
-                      console.log(JSON.stringify(response));
-                        //  alert('success');
-                          console.log(PDK.getSession().accessToken);
+    $('#uber-logout-button').on('click',function(){
+            console.log("Clicked logout");
+            document.getElementById("uber-data").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("uber-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("uber-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("uber-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("uber-data4").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+             document.getElementById("uber-button").style.display='block';
+             document.getElementById("uber-logout-button").style.display='none';
+       })
+    </script></th>
+    <th title="Field #5"><a id="twitter-button" class="btn btn-block btn-social btn-twitter" style="color:white">
+      <i class="fab fa-twitter"></i> Twitter
+    </a>
+    <a id="twitter-logout-button" class="btn btn-block btn-social btn-twitter" style="color:white;display: none;">
+      <i class="fab fa-twitter"></i>Logout</a>
+    <script>
+      
+      $('#twitter-button').on('click', function() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+        // Use popup for OAuth
+        OAuth.popup('twitter').then(twitter => {
+        console.log('twitter:', twitter);
+        // Prompts 'welcome' message with User's name on successful login
+        // #me() is a convenient method to retrieve user data without requiring you
+        // to know which OAuth provider url to call
+        twitter.me().then(data => {
+          document.getElementById("twitter-data").innerHTML = data.avatar ;
+          document.getElementById("twitter-data1").innerHTML = data.id ;
+          document.getElementById("twitter-data2").innerHTML = data.name ;
+          document.getElementById("twitter-data3").innerHTML = data.alias ;
+          document.getElementById("twitter-data4").innerHTML = data.bio ;
+          document.getElementById("twitter-data5").innerHTML = data.raw.location ;
+          document.getElementById("twitter-data6").innerHTML = data.raw.followers_count ;
+          document.getElementById("twitter-data7").innerHTML = data.raw.friends_count ;
+          document.getElementById("twitter-data8").innerHTML = data.raw.created_at ;
+          console.log('me data:', data);
+          document.getElementById("twitter-button").style.display='none';
+          document.getElementById("twitter-logout-button").style.display='block';
           
-                          var yahoo = $( "#result" ).load( "https://api.pinterest.com/v1/me/?access_token="+PDK.getSession().accessToken+"&fields=counts" );
-                          console.log(yahoo);
-                          PDK.logout();
+        });
+        // Retrieves user data from OAuth provider by using #get() and
+        // OAuth provider url
+        
+        twitter.get('/v1/users/self').then(data => {
+          console.log('self data:', data);
+          
+        })
+      });
+    })
+    $('#twitter-logout-button').on('click',function(){
+            console.log("Clicked logout");
+             document.getElementById('twitter-data').innerHTML= "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+             document.getElementById("twitter-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data4").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data5").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data6").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data7").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+          document.getElementById("twitter-data8").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+             document.getElementById("twitter-button").style.display='block';
+             document.getElementById("twitter-logout-button").style.display='none';
+       })
+    </script></th>
+    <th title="Field #6"><a id="linkedin-button" class="btn btn-block btn-social btn-linkedin" style="color:white">
+      <i class="fab fa-linkedin"></i> LinkedIn </a>
+      <a id="linkedin-logout-button" class="btn btn-block btn-social btn-linkedin" style="color:white;display: none;">
+        <i class="fab fa-linkedin"></i>Logout</a>
+      <script>
+        $('#linkedin-button').on('click', function() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+        // Use popup for oauth
+        OAuth.popup('linkedin').then(linkedin => {
+          console.log('linkedin:',linkedin);
+          // Prompts 'welcome' message with User's email on successful login
+          // #me() is a convenient method to retrieve user data without requiring you
+          // to know which OAuth provider url to call
+          linkedin.me().then(data => {
+            console.log('me data:', data);
+            document.getElementById("linkedin-data").innerHTML = data.avatar ; 
+            document.getElementById("linkedin-data1").innerHTML = data.id ;
+            document.getElementById("linkedin-data2").innerHTML = data.name ;
+            document.getElementById("linkedin-data3").innerHTML = data.email ;
+            document.getElementById("linkedin-data4").innerHTML = data.bio ;
+            document.getElementById("linkedin-button").style.display='none';
+            document.getElementById("linkedin-logout-button").style.display='block';
+           // alert('Linkedin says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+          })
+          // Retrieves user data from OAuth provider by using #get() and
+          // OAuth provider url
+          linkedin.get('/v1/people/~:(id,first-name,last-name,headline,picture-url,email-address,public-profile-url)?format=json').then(data => {
+            console.log('self data:', data);
+          })
+        });
+      })
+      $('#linkedin-logout-button').on('click',function(){
+          console.log("Clicked logout");
+          document.getElementById("linkedin-data").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("linkedin-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("linkedin-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("linkedin-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("linkedin-data4").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+           document.getElementById("linkedin-button").style.display='block';
+           document.getElementById("linkedin-logout-button").style.display='none';
+     })
+      </script></th>
+      
+    <th title="Field #8"><a id="pinterest-button" class="btn btn-block btn-social btn-pinterest" style="color:white">
+      <span class="fab fa-pinterest"></span> Pinterest </a>
+      <a id="pinterest-logout-button" class="btn btn-block btn-social btn-pinterest" style="color:white;display: none;">
+        <i class="fab fa-pinterest"></i>Logout</a>
+      <script>
+        $('#pinterest-button').on('click', function (){
+            window.pAsyncInit = function() {
+                PDK.init({
+                    appId: "4997722204998226483",
+                    cookie: true
+                });
+                //login
+                PDK.login({ scope : 'read_relationships,read_public' }, function(response){
+                    if (!response || response.error) {
+                        alert('Error occurred');
+                    } else {
+                      
+                       console.log(JSON.stringify(response));
+                       
                     }
-                  });
-                  
-                  //end get board info
-                  });
-                  //end login
-              };
-              (function(d, s, id){
-                  var js, pjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) {return;}
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//assets.pinterest.com/sdk/sdk.js";
-                  pjs.parentNode.insertBefore(js, pjs);
-              }(document, 'script', 'pinterest-jssdk'));
-          });
-          </script>
-    <td>No Limit</td>
-    <td id="result">Pins<br/>Followers<br/>Following<br/>Boards<br/>Pinterest ID</td>
-    <td>None</td>
-    <td>None</td>
-    <td>Yes</td>
-    </tr>
-    <tr>
-    <td>Amazon<br>
-     <a id="amazon-button" class="btn btn-block btn-social btn-github" style="color:white"> 
-        <i class="fab fa-amazon"></i> Sign in With Amazon </a>
-      <script>
-        $('#amazon-button').on('click', function() {
-          // Initialize with your OAuth.io app public key
-          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-          // Use popup for OAuth
-          OAuth.popup('amazon').then(amazon => {
-          console.log('amazon:', amazon);
-          // Prompts 'welcome' message with User's name on successful login
-          // #me() is a convenient method to retrieve user data without requiring you
-          // to know which OAuth provider url to call
-          amazon.me().then(data => {
-            document.getElementById("amazon-data").innerHTML = "<b>Amazon ID : </b>"+data.id +"<br> <b>Email ID : </b>"+ data.email +"<br><b> Name : </b>"+ data.name +"<br><b> Zipcode : </b>"+ data.zipcode  ; 
-            console.log('me data:', data);
-            
-          });
-          // Retrieves user data from OAuth provider by using #get() and
-          // OAuth provider url
-          amazon.get('/v1/users/self').then(data => {
-            console.log('self data:', data);
-            
-          })
+                //get board info
+                var pins = [];
+                PDK.request('/v1/me/', function (response) {
+                  if (!response || response.error) {
+                    //alert('Error occurred');
+                  } else {
+                    console.log(JSON.stringify(response));
+                      //  alert('success');
+                      
+                        console.log(PDK.getSession().accessToken);
+                        document.getElementById("pinterest-data2").innerHTML = response.data.id;
+                        document.getElementById("pinterest-data3").innerHTML = response.data.first_name+" "+response.data.last_name ;
+                        var yahoo = $( "#pinterest-data1" ).load( "https://api.pinterest.com/v1/me/?access_token="+PDK.getSession().accessToken+"&fields=counts" );
+                        console.log(yahoo);
+                        PDK.logout();
+                  }
+                });
+                
+                //end get board info
+                });
+                //end login
+            };
+            (function(d, s, id){
+                var js, pjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//assets.pinterest.com/sdk/sdk.js";
+                pjs.parentNode.insertBefore(js, pjs);
+            }(document, 'script', 'pinterest-jssdk'));
         });
-       
-      })
-     
-      </script>
-   
-     </td>
-    <td>Limited Access</td>
-    <td id="amazon-data">Amazon ID<br/>Email Id<br/>Name<br/>Zipcode<br/></td>
-    <td> </td>
-    <td> </td>
-    <td>No</td>
-    </tr>
-    <tr>
-    <td>Uber<br>
-      <a id="uber-button" class="btn btn-block btn-social btn-github" style="color:white">
-        <i class="fab fa-uber"></i> Sign in With Uber </a>
-      <script>
-        $('#uber-button').on('click', function() {
-          // Initialize with your OAuth.io app public key
-          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-          // Use popup for OAuth
-          OAuth.popup('uber').then(uber => {
-          console.log('uber:', uber);
-          // Prompts 'welcome' message with User's name on successful login
-          // #me() is a convenient method to retrieve user data without requiring you
-          // to know which OAuth provider url to call
-          uber.me().then(data => {
-            document.getElementById("uber-data").innerHTML = "<b>Rider ID : </b>"+data.raw.rider_id +"<br><b> Email ID : </b>"+ data.raw.email +"<br><b> Name : </b>"+ data.raw.first_name +" "+ data.raw.last_name +"<br><b> Promo Code : </b>"+ data.raw.promo_code +"<br><b> UUID : </b>"+ data.raw.uuid ; 
-            console.log('me data:', data);
-            
-          });
-          // Retrieves user data from OAuth provider by using #get() and
-          // OAuth provider url
-          uber.get('/v1/users/self').then(data => {
-            console.log('self data:', data);
-            
-          })
-        });
-      })
-      </script></td>
-    <td>Limited Access</td>
-    <td id="uber-data">Rider ID<br/>Email Id<br/>Name<br/>Promo code<br/>UUID</td>
-    <td>all_trips<br/>request_receipts<br/>request</td>
-    <td>1.Sign up as Driver<br/>2.Verify to work as driver<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
-    <td>No</td>
-    </tr>
-    <tr>
-    <td>Twitter<br>
-      <a id="twitter-button" class="btn btn-block btn-social btn-twitter" style="color:white">
-        <i class="fab fa-twitter"></i> Sign in With Twitter
-      </a>
-      <script>
-        $('#twitter-button').on('click', function() {
-          // Initialize with your OAuth.io app public key
-          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-          // Use popup for OAuth
-          OAuth.popup('twitter').then(twitter => {
-          console.log('twitter:', twitter);
-          // Prompts 'welcome' message with User's name on successful login
-          // #me() is a convenient method to retrieve user data without requiring you
-          // to know which OAuth provider url to call
-          twitter.me().then(data => {
-            document.getElementById("twitter-data").innerHTML = "<b>Twitter ID : </b> "+data.id +"<br><b> Username : </b>"+data.alias+"<br><b> Screen Name : </b>"+ data.name +"<br><b> Account Created at : </b>" +data.raw.created_at + "<br><b> Followers : </b>"+ data.raw.followers_count +"<br><b> Following : </b>"+ data.raw.friends_count+ "<br><b> Location : </b>"+ data.raw.location +"<br><b> Bio : </b>"+ data.bio ; 
-            console.log('me data:', data);
-            
-          });
-          // Retrieves user data from OAuth provider by using #get() and
-          // OAuth provider url
-          twitter.get('/v1/users/self').then(data => {
-            console.log('self data:', data);
-            
-          })
-        });
-      })
-      </script>
-    </td>
-    <td>Limited Before Review</td>
-    <td id='twitter-data'> Twitter ID<br/>Username<br/>Screen Name<br/>Account created at<br/>Followers<br/>Following<br/>Location<br/>Bio</td>
-    <td> </td>
-    <td>1.Apply for application review<br/>2.Explain in detail why additional <br/>   permission are needed<br/></td>
-    <td>Yes</td>
-    </tr>
-    <tr>
-    <td>LinkedIn<br>
-      <a id="linkedin-button" class="btn btn-block btn-social btn-linkedin" style="color:white">
-          <i class="fab fa-linkedin"></i> Sign in With LinkedIn </a></td>
-          <script>
-            $('#linkedin-button').on('click', function() {
-            // Initialize with your OAuth.io app public key
-            OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-            // Use popup for oauth
-            OAuth.popup('linkedin').then(linkedin => {
-              console.log('linkedin:',linkedin);
-              // Prompts 'welcome' message with User's email on successful login
-              // #me() is a convenient method to retrieve user data without requiring you
-              // to know which OAuth provider url to call
-              linkedin.me().then(data => {
-                console.log('me data:', data);
-                document.getElementById("linkedin-data").innerHTML = "<b>LinkedIn ID : </b>"+data.id +"<br><b> Name : </b>"+ data.name +"<br><b> Bio : </b>"+data.bio+"<br><b> Email ID : </b>"+data.email ; 
-               // alert('Linkedin says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
-              })
-              // Retrieves user data from OAuth provider by using #get() and
-              // OAuth provider url
-              linkedin.get('/v1/people/~:(id,first-name,last-name,headline,picture-url,email-address,public-profile-url)?format=json').then(data => {
-                console.log('self data:', data);
-              })
-            });
-          })
-          </script>
-    <td>Limited </td>
-    <td id='linkedin-data'>LinkedIn ID<br/> Name<br/>Bio<br/>Email Id<br/></td>
-    <td>connections and more</td>
-    <td>Partnership Program</td>
-    <td>Yes</td>
-    </tr>
-    <tr>
-    <td>Instagram<br>
-    <a id="instagram-button" class="btn btn-block btn-social btn-instagram" style="color:white">
-      <i class="fab fa-instagram"></i> Sign in With Instagram </a></td>
+        $('#pinterest-logout-button').on('click',function(){
+            console.log("Clicked logout");
+             document.getElementById('pinterest-data').innerHTML="Pins<br/>Followers<br/>Following<br/>Boards<br/>Pinterest ID";
+             document.getElementById("pinterest-button").style.display='block';
+             document.getElementById("pinterest-logout-button").style.display='none';
+       })
+        </script></th>
+    <th title="Field #9"><a id="instagram-button" class="btn btn-block btn-social btn-instagram" style="color:white">
+      <i class="fab fa-instagram"></i> Instagram </a>
+      <a id="instagram-logout-button" class="btn btn-block btn-social btn-instagram" style="color:white;display: none;">
+        <i class="fab fa-instagram"></i>Logout</a>
       <script>
           $('#instagram-button').on('click', function() {
             // Initialize with your OAuth.io app public key
@@ -352,8 +448,17 @@
             // #me() is a convenient method to retrieve user data without requiring you
             // to know which OAuth provider url to call
             instagram.me().then(data => {
-              document.getElementById("insta-data").innerHTML = "<b> Instagram ID : </b>"+data.id +"<br><b> Username : </b>"+ data.alias +"<br><b> Name : </b>"+ data.name +"<br><b> Bio : </b>"+ data.raw.data.bio +"<br><b> Followers : </b>"+ data.raw.data.counts.followed_by +"<br><b> Following : </b>"+ data.raw.data.counts.follows +"<br><b> Posts count : </b>"+ data.raw.data.counts.media  ; 
+              document.getElementById("insta-data").innerHTML = data.avatar ;
+              document.getElementById("insta-data1").innerHTML = data.id ;
+              document.getElementById("insta-data2").innerHTML = data.name ;
+              document.getElementById("insta-data3").innerHTML = data.alias ;
+              document.getElementById("insta-data4").innerHTML = data.raw.data.bio ;
+              document.getElementById("insta-data5").innerHTML = data.raw.data.counts.followed_by ;
+              document.getElementById("insta-data6").innerHTML = data.raw.data.counts.follows ;
+              document.getElementById("insta-data7").innerHTML = data.raw.data.counts.media ;
               console.log('me data:', data);
+              document.getElementById("instagram-button").style.display='none';
+            document.getElementById("instagram-logout-button").style.display='block';
               
             });
             // Retrieves user data from OAuth provider by using #get() and
@@ -369,52 +474,23 @@
         
           });           
         })
-        </script>
-    <td>Limited Before Review</td>
-    <td id="insta-data">Instagram ID<br/>Username<br/>Name<br/>Bio<br/>Followers<br/>Following<br/>Posts count</td>
-    <td>Other permissions are depricated</td>
-    <td>1.Apply for application review<br/>2.Make a video of application<br/>3.Explain in detail why additional <br/>   permission are needed<br/></td>
-    <td>Yes</td>
-    </tr>
-    <td>GitHub<br>
-      <a id="github-button" class="btn btn-block btn-social btn-github" style="color:white">
-        <i class="fab fa-github"></i> Sign in With Github </a>
-        <script>
-          $('#github-button').on('click', function() {
-          // Initialize with your OAuth.io app public key
-          OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
-          // Use popup for oauth
-          // Alternative is redirect
-          OAuth.popup('github').then(github => {
-            console.log('github:', github);
-            // Retrieves user data from oauth provider
-            // Prompts 'welcome' message with User's email on successful login
-            // #me() is a convenient method to retrieve user data without requiring you
-            // to know which OAuth provider url to call
-            github.me().then(data => {
-              console.log('me data:', data);
-              document.getElementById("github-data").innerHTML = "<b> Github ID : </b>"+data.id +"<br><b> Username : </b>"+ data.alias +"<br><b> Name : </b>"+ data.name +"<br><b> Email ID : </b>"+data.email+"<br><b> Location : </b>"+ data.location +"<br><b> Followers : </b>"+ data.raw.user.followers +"<br><b> Following : </b>"+ data.raw.user.following +"<br><b> Bio : </b>"+ data.bio ; 
-              //alert('GitHub says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
-            });
-            // Retrieves user data from OAuth provider by using #get() and
-            // OAuth provider url
-            github.get('/user').then(data => {
-              console.log('self data:', data);
-            })
-          });
-        })
-        </script>
-    </td>
-    <td> </td>
-    <td id='github-data'>Github ID<br/>Username<br/>Name<br/>Email Id<br/>Location<br/>Followers<br/>Following<br/>Bio</td>
-    <td> </td>
-    <td> </td>
-    <td>yes</td>
-    </tr>
-    <tr>
-    <td>Yahoo<br>
-      <a id="yahoo-button" class="btn btn-block btn-social btn-yahoo" style="color:white">
-        <i class="fab fa-yahoo"></i> Sign in With Yahoo </a>
+        $('#instagram-logout-button').on('click',function(){
+              console.log("Clicked logout");
+              document.getElementById("insta-data").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data4").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data5").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data6").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+              document.getElementById("insta-data7").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+               document.getElementById("instagram-button").style.display='block';
+               document.getElementById("instagram-logout-button").style.display='none';
+         })
+        </script></th>
+        <th title="Field #10">  <a id="yahoo-button" class="btn btn-block btn-social btn-yahoo" style="color:white">
+          <i class="fab fa-yahoo"></i> Yahoo </a> <a id="yahoo-logout-button" class="btn btn-block btn-social btn-yahoo" style="color:white;display: none;">
+          <i class="fab fa-yahoo"></i>Logout</a>
       <script>
         $('#yahoo-button').on('click', function() {
           // Initialize with your OAuth.io app public key
@@ -428,6 +504,8 @@
           yahoo.me().then(data => {
             //document.getElementById("uber-data").innerHTML = data.raw.rider_id +"<br>"+ data.raw.email +"<br>"+ data.raw.first_name +"<br>"+ data.raw.last_name +"<br>"+ data.raw.promo_code +"<br>"+ data.raw.uuid ; 
             console.log('me data:', data);
+            document.getElementById("yahoo-button").style.display='none';
+            document.getElementById("yahoo-logout-button").style.display='block';
             
           });
           // Retrieves user data from OAuth provider by using #get() and
@@ -438,14 +516,242 @@
           })
         });
       })
-      </script></td>
-    <td>Limited Access</td>
-    <td id="yahoo-data">client_Id<br/>language<br/>max_age<br/></td>
-    <td>None</td>
-    <td>1.Create application<br/>2.Get Auhtorisation Credentials<br/>3.Authenticate Users<br/>4.Send authentication request to Yahoo</td>
-    <td>yes</td>
+      $('#yahoo-logout-button').on('click',function(){
+              console.log("Clicked logout");
+               document.getElementById('yahoo-data').innerHTML="Twitter ID<br/>Username<br/>Screen Name<br/>Account created at<br/>Followers<br/>Following<br/>Location<br/>Bio";
+               document.getElementById("yahoo-button").style.display='block';
+               document.getElementById("yahoo-logout-button").style.display='none';
+         })
+      </script></th>
+      <th title="Field #11">
+          <a id="google-button" class="btn btn-block btn-social btn-google" style="color:white">
+              <i class="fab fa-google"></i>Google </a><a id="google-logout-button" class="btn btn-block btn-social btn-google" style="color:white;display: none;">
+              <i class="fab fa-google"></i>Logout</a>
+            <script>
+              $('#google-button').on('click', function() {
+                // Initialize with your OAuth.io app public key
+                OAuth.initialize('w73VXSq4rrXW8mSGCm_JNLF5j34');
+                // Use popup for OAuth
+                OAuth.popup('google').then(google => {
+                  console.log('google:',google);
+                  // Retrieves user data from oauth provider
+                  // Prompts 'welcome' message with User's email on successful login
+                  // #me() is a convenient method to retrieve user data without requiring you
+                  // to know which OAuth provider url to call
+                  google.me().then(data => {
+                    document.getElementById("google-data").innerHTML = data.avatar ; 
+            document.getElementById("google-data1").innerHTML = data.id ;
+            document.getElementById("google-data2").innerHTML = data.name ;
+            document.getElementById("google-data3").innerHTML = data.email ;
+                    console.log('me data:', data);
+                    document.getElementById("google-button").style.display='none';
+            document.getElementById("google-logout-button").style.display='block';
+          });
+                    // Retrieves user data from OAuth provider by using #get() and
+                  // OAuth provider url
+                  google.get('/plus/v1/people/me').then(data => {
+                    console.log('self data:', data);
+                  })
+                });
+              })
+              $('#google-logout-button').on('click',function(){
+              console.log("Clicked logout");
+               document.getElementById('google-data').innerHTML= "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+               document.getElementById("google-data1").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("google-data2").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+            document.getElementById("google-data3").innerHTML = "<center><img src = 'https://www.finecut.co.uk/media/image/product-8265.png' height='11px' width='11px'></center>";
+               document.getElementById("google-button").style.display='block';
+               document.getElementById("google-logout-button").style.display='none';
+         })
+            </script>
+      </th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Profile Picture</b><br>
+              <td id='facebook-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              <td id='github-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              <td><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+              <td id='uber-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              <td id='twitter-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              <td id='linkedin-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              
+              <td id='pinterest-data1'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+              <td id='insta-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+              <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+              <td id='google-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+             </td>
+               </tr>   
+         
+      <tr>
+      <td><b>ID</b></td>
+      <td id='facebook-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='github-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='amazon-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='uber-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='twitter-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='linkedin-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    
+    <td id='pinterest-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='insta-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='yahoo-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='google-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
     </tr>
+    <tr>
+    <td><b>Name</b>    </td>
+    <td id='facebook-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='github-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='amazon-data1'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='uber-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='twitter-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='linkedin-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='pinterest-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='insta-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='yahoo-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    <td id='google-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    </tr>
+    <tr>
+    <td><b>Email ID</b><br>
+      <td id='facebook-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='github-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='amazon-data2'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='uber-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='twitter-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='linkedin-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='insta-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='yahoo-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='google-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+    </tr>
+    <tr>
+    <td><b>Username</b> </td>
+    <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    <td id='github-data4'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>  
+    <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='twitter-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='insta-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <tr>
+    <td><b>Bio</b> </td>
+    <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    <td id='github-data5'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>  
+    <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='twitter-data4'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='linkedin-data4'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      
+      <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='insta-data4'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <tr>
+    <td><b>Location</b><br>
+      <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='github-data6'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='twitter-data5'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      
+      <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='insta-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <tr>
+    <td><b>Followers</b><br></td>
+    <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    <td id='github-data7'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>  
+    <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='twitter-data6'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      
+      <td id='pinterest-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='insta-data5'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <td><b>Following</b> </td>
+    <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    <td id='github-data8'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>  
+    <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='twitter-data7'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      
+      <td id='pinterest-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='insta-data6'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+      <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+      <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <tr>
+    <td><b>Posts</b>     
+     </td>
+     <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='github-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='amazon-data2'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='twitter-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     
+     <td id='pinterest-data'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+     <td id='insta-data7'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+     <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+     <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+    </tr>
+    <tr>
+        <td><b>Zipcode</b>     
+         </td>
+         <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='github-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='amazon-data3'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+         <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='twitter-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         
+         <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='insta-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+         <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+        </tr>
+        <tr>
+            <td><b>Promo Code</b>     
+             </td>
+             <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='github-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='amazon-data3'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='uber-data4'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+             <td id='twitter-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             
+             <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='insta-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+             <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+            </tr>
+            <tr>
+                <td><b>Account Created At</b>     
+                 </td>
+                 <td id='fbMail'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='github-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='amazon-data3'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='uber-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='twitter-data8'><center><img src="https://www.finecut.co.uk/media/image/product-8265.png" height="11px" width="11px"></center></td>
+                 <td id='linkedin-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 
+                 <td id='pinterest-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='insta-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='yahoo-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                 <td id='google-data'><center><i class ="fas fa-minus" style="font-size:11px;"></i></center></td>
+                </tr>
     </tbody></table>
-  </div>
+  <!-- </div> -->
 </body>
 </html>
